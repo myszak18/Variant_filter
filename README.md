@@ -53,5 +53,6 @@ b) changing to 1 format coordinates:
 
 c) changing filter parameters:
 
-The default parameteres are like in original fpfilter.pl script. You can change all of them for example:
-`python variant_filter.py example.vcf snvs.readcount --output_file new.fpfilter --min_depth 20 ` changes minimal variant depth to 20.
+The default parameteres are like in original fpfilter.pl script. You can change all of them for example:  
+`python variant_filter.py example.vcf snvs.readcount --output_file new.fpfilter --min_depth 20 ` 
+changes minimal variant depth to 20.
