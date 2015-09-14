@@ -20,7 +20,7 @@ Script assumes insetions are present in this format:
 chr1 8789695 . A AT  
 Deletions can be present in either:  
 - 0 format: chr2 5858778 . AC A  
-- 1 format: chr2 5858779 . C - .  
+- 1 format: chr2 5858779 . C - .   
 Readcount file preparation is more complicated if deletions are present in 0 format (see readcount file preparation below). 
 
 ## 2. Readcount file preparation. ##
