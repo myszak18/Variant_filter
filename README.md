@@ -10,9 +10,9 @@ It adds new functionality: filtering insertions and deletion.
 a) Script accepts variant calls in vcf format. It assumes that vcf contains one allele per line. If it is not the case,
 one can format vcf with vcfbreakmulti utility from vcflib (https://github.com/ekg/vcflib).
 
-b) Double allele issue: if there is both single nucleotide variant and indel present in one position, after using vcfbreakmulti the line with single nucleotide variant may look like this:
-
-chr1 8789695 . AC AT. Such cases must be fixed (the script to do so is in preparation) like this:  
+b) Double allele issue: if there is both single nucleotide variant and indel present in one position, after using vcfbreakmulti the line with single nucleotide variant may look like this:  
+chr1 8789695 . AC AT.   
+Such cases must be fixed (the script to do so is in preparation) like this:  
 chr1 8789696 . C  T. 
 
 c) Insertion and deletion format.
@@ -21,6 +21,7 @@ chr1 8789695 . A AT
 Deletions can be present in either:  
 - 0 format: chr2 5858778 . AC A  
 - 1 format: chr2 5858779 . C - .   
+
 Readcount file preparation is more complicated if deletions are present in 0 format (see readcount file preparation below). 
 
 ## 2. Readcount file preparation. ##
@@ -54,5 +55,5 @@ b) changing to 1 format coordinates:
 c) changing filter parameters:
 
 The default parameteres are like in original fpfilter.pl script. You can change all of them for example:  
-`python variant_filter.py example.vcf snvs.readcount --output_file new.fpfilter --min_depth 20 ` 
+`python variant_filter.py example.vcf snvs.readcount --output_file new.fpfilter --min_depth 20 `   
 changes minimal variant depth to 20.
