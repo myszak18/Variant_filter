@@ -43,17 +43,14 @@ Run it like follows:
 
 ## 3. Script example usage: ##
 
-a) basic usage:
-
+a) basic usage:  
 `python variant_filter.py example.vcf snvs.readcount --output_file new.fpfilter`  
 This assumes indels are in 0 format coordinates. Output file name is optional.
 
-b) changing to 1 format coordinates:
-
+b) changing to 1 format coordinates:  
 `python variant_filter.py example.vcf snvs.readcount --output_file new.fpfilter --indel_type 1_format`
 
-c) changing filter parameters:
-
+c) changing filter parameters:  
 The default parameteres are like in original fpfilter.pl script. You can change all of them for example:  
 `python variant_filter.py example.vcf snvs.readcount --output_file new.fpfilter --min_depth 20 `   
 changes minimal variant depth to 20.
