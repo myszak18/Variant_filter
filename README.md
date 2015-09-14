@@ -38,7 +38,7 @@ b) Readcount file preparation
 
 Install readcount script: https://github.com/genome/bam-readcount 
 
-Run it like follows:
+Run it like follows:  
 `bam-readcount -q1 -b15 -w1 -l snvs.var -f reference.fasta example.bam > snvs.readcount`
 
 ## 3. Script example usage: ##
