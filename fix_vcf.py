@@ -63,20 +63,25 @@ def main():
                         for number in comparison:
                             del alt_list[number]
                             del ref_list[number]
-                        for item1,item2 in enumerate(zip(alt_list,ref_list)):
+                        for i, (item1,item2) in enumerate(zip(alt_list,ref_list)):
                             #We have to separate each alternate allele
                             new_index=alt.find(item1)
                             new_position=str(position+new_index)
                             data[1]=new_position
-                            data[3:5]=[item1,item2]
+                            data[3:5]=[item2,item1]
                             output.write(("\t").join(data))
-                            
-        output.close()
+    output.close()
 
 def sameindex(string1, string2):
     number_list=[]
     for i, (char1, char2) in enumerate(zip(string1, string2)):
         if char1 == char2:
-            return number_list
-    return -1
+            number_list.append(i)
+    number_list.sort(reverse=True)
+    return number_list
+    
+if __name__ == '__main__':
+    main()
+    
+
                     
