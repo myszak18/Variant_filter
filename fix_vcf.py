@@ -16,7 +16,7 @@ def main():
     
     parser.add_argument('var_file', type=str)
     parser.add_argument('output_file', type=str)
-    parser.add_argument("--fix_indels",choices=[True,False],default=False)
+    parser.add_argument("--fix_indels",choices=["True","False"],default="False")
     
     args = parser.parse_args()
     
@@ -44,32 +44,30 @@ def main():
                 alt=data[4]
                 position=int(data[1])
                 ## Fix indels if this option is set to true
-                if args.fix_indels:
-                    if len(ref)>len(alt):
-                        ref=alt.lstrip(alt)
-                        position=str(position+len(alt))
-                        alt="-"
-                        data[1]=position
-                        data[3:5]=[ref,alt]
-                        output.write(("\t").join(data))
+                if len(ref)>len(alt) and args.fix_indels=="True":
+                    ref=ref[len(alt):]
+                    position=str(position+len(alt))
+                    alt="-"
+                    data[1]=position
+                    data[3:5]=[ref,alt]
+                    output.write(("\t").join(data))
+                elif len(ref) != len(alt) or len(ref)==len(alt)==1:
+                    output.write(line) 
                 else:
-                    if len(ref) != len(alt) or len(ref)==len(alt)==1:
-                        output.write(line)
-                    else:
-                        alt_list=list(alt)
-                        ref_list=list(ref)
-                        #getting indices of the same item
-                        comparison=sameindex(alt,ref)
-                        for number in comparison:
-                            del alt_list[number]
-                            del ref_list[number]
-                        for i, (item1,item2) in enumerate(zip(alt_list,ref_list)):
-                            #We have to separate each alternate allele
-                            new_index=alt.find(item1)
-                            new_position=str(position+new_index)
-                            data[1]=new_position
-                            data[3:5]=[item2,item1]
-                            output.write(("\t").join(data))
+                    alt_list=list(alt)
+                    ref_list=list(ref)
+                    #getting indices of the same item
+                    comparison=sameindex(alt,ref)
+                    for number in comparison:
+                        del alt_list[number]
+                        del ref_list[number]
+                    for i, (item1,item2) in enumerate(zip(alt_list,ref_list)):
+                        #We have to separate each alternate allele
+                        new_index=alt.find(item1)
+                        new_position=str(position+new_index)
+                        data[1]=new_position
+                        data[3:5]=[item2,item1]
+                        output.write(("\t").join(data))
     output.close()
 
 def sameindex(string1, string2):
