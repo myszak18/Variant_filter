@@ -12,7 +12,7 @@ one can format vcf with vcfbreakmulti utility from vcflib (https://github.com/ek
 
 b) Double allele issue: if there is both single nucleotide variant and indel present in one position, after using vcfbreakmulti the line with single nucleotide variant may look like this:  
 chr1 8789695 . AC AT.   
-Such cases must be fixed (the script to do so is in preparation) like this:  
+Such cases must be fixed like this:  
 chr1 8789696 . C  T. 
 
 c) Insertion and deletion format.
@@ -22,7 +22,17 @@ Deletions can be present in either:
 - 0 format: chr2 5858778 . AC A  
 - 1 format: chr2 5858779 . C - .   
 
-Readcount file preparation is more complicated if deletions are present in 0 format (see readcount file preparation below). 
+Readcount file preparation is more complicated if deletions are present in 0 format (see readcount file preparation below).
+
+d) Fixing double alleles and (optionally) deletions with var_fix.py script:
+
+Running:  
+`python fix_vcf.py example.vcf fix.vcf`  
+will fix double alleles for you (note that is assumes that vcf file was treated with vcfbreakmulti).
+
+Running:  
+`python fix_vcf.py example.vcf fix.vcf --fix_indels=True` 
+will fix double alleles for you and will convert deletions to 1 format. 
 
 ## 2. Readcount file preparation. ##
 
