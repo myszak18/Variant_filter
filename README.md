@@ -31,7 +31,7 @@ Running:
 will fix double alleles for you (note that is assumes that vcf file was treated with vcfbreakmulti).
 
 Running:  
-`python fix_vcf.py example.vcf fix.vcf --fix_indels=True` 
+`python fix_vcf.py example.vcf fix.vcf --fix_indels=True`   
 will fix double alleles for you and will convert deletions to 1 format. 
 
 ## 2. Readcount file preparation. ##
