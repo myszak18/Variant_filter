@@ -1,7 +1,7 @@
 # Variant_filter
 
-This scrpit is based on variant filter scrpit fpfilter.pl by Dan Koboldt and David Larson (https://github.com/ckandoth/variant-filter).
-It adds new functionality: filtering insertions and deletion.
+This scrpit is based on variant filter scrpit fpfilter.pl by Dan Koboldt and David Larson (https://github.com/ckandoth/variant-filter). The script is rewritten in python and 
+adds new functionality: filtering insertions and deletions.
 
 # USAGE: #
 
@@ -18,7 +18,7 @@ chr1 8789696 . C  T.
 c) Insertion and deletion format.
 Script assumes insetions are present in this format:  
 chr1 8789695 . A AT  
-Deletions can be present in either:  
+Deletions can be present in:
 - 0 format: chr2 5858778 . AC A  
 - 1 format: chr2 5858779 . C - .   
 
