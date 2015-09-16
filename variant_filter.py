@@ -3,7 +3,7 @@
 """
 Created on Fri Sep 04 10:54:59 2015
 
-@author: szak
+@author: Myszak
 """
 
 import argparse
@@ -120,10 +120,10 @@ def main():
                 ref=ref[0]
                 alt=alt[0]
             elif len(ref)<len(alt):
-                alt="+"+alt.lstrip(ref)
+                alt="+"+alt[len(ref):]
             elif len(ref)>len(alt):
                 if args.indel_type=="0_format":
-                    alt="-"+ref.lstrip(alt)
+                    alt="-"+ref[len(alt):]
                     #Our readcount file should take into account position change in indels
                     position=str(int(position)+1)
                 elif args.indel_type=="1_format":
