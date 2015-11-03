@@ -1,36 +1,30 @@
-#!/usr/bin/python env
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Sep 14 14:36:30 2015
-
-@author: Myszak
-"""
+#!/usr/bin/python
 
 import argparse
 import os.path
 import sys
 
 def main():
-    
+
     parser = argparse.ArgumentParser(description='''The purpose of this script is to fix multiple alleles''')
-    
+
     parser.add_argument('var_file', type=str)
     parser.add_argument('output_file', type=str)
     parser.add_argument("--fix_indels",choices=["True","False"],default="False")
-    
+
     args = parser.parse_args()
-    
+
     if os.path.isfile(args.var_file)==False:
         sys.exit("var-file is not valid!")
-        
+
     output=open(args.output_file,"w")
-    
+
     var_file=open(args.var_file)
-    
+
     content_vcf=var_file.readlines()
-    
+
     var_file.close()
-    
+
     for line in content_vcf:
         if line.startswith("#"):
             output.write(line)
@@ -52,7 +46,7 @@ def main():
                     data[3:5]=[ref,alt]
                     output.write(("\t").join(data))
                 elif len(ref) != len(alt) or len(ref)==len(alt)==1:
-                    output.write(line) 
+                    output.write(line)
                 else:
                     alt_list=list(alt)
                     ref_list=list(ref)
@@ -63,11 +57,14 @@ def main():
                         del ref_list[number]
                     for i, (item1,item2) in enumerate(zip(alt_list,ref_list)):
                         #We have to separate each alternate allele
-                        new_index=alt.find(item1)
-                        new_position=str(position+new_index)
-                        data[1]=new_position
-                        data[3:5]=[item2,item1]
-                        output.write(("\t").join(data))
+                        new_index=list(find_all(alt,item1))
+                        other_index=list(find_all(ref,item2))
+                        index_final=list(set(other_index).intersection(new_index))
+                        if len(index_final)==1:
+                            new_position=str(position+index_final[0])
+                            data[1]=new_position
+                            data[3:5]=[item2,item1]
+                            output.write(("\t").join(data))
     output.close()
 
 def sameindex(string1, string2):
@@ -78,8 +75,16 @@ def sameindex(string1, string2):
     number_list.sort(reverse=True)
     return number_list
     
+def find_all(a_str, sub):
+    start = 0
+    while True:
+        start = a_str.find(sub, start)
+        if start == -1: return
+        yield start
+        start += len(sub)
+
 if __name__ == '__main__':
     main()
-    
 
-                    
+
+
